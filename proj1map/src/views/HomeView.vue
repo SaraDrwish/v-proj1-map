@@ -23,7 +23,7 @@
         </div>
       </div>
       <!-- IP info -->
-      <IPInfo v-if="iPInfo" v-bind:ipInfo="ipInfo" />
+      <IPInfo v-if="iPInfoo" v-bind:iPInfoo="iPInfoo" />
     </div>
 
     <!-- /////MAp//// -->
@@ -48,7 +48,7 @@ export default {
   setup() {
     let map;
     const queryIP = ref("");
-    const iPInfo = ref(null);
+    const iPInfoo = ref(null);
 
     const getIpInfo = async () => {
       try {
@@ -57,7 +57,7 @@ export default {
         );
         const result = data.data;
         console.log(result);
-        iPInfo.value = {
+        iPInfoo.value = {
           address: result.ip,
           state: result.location.region,
           timezone: result.location.timezone,
@@ -65,8 +65,8 @@ export default {
           lat: result.location.lat,
           lng: result.location.lng,
         };
-        leaflet.marker([ipInfo.value.lat, ipInfo.value.lng]).addTo(map);
-        map.setView([ipInfo.value.lat, ipInfo.value.lng], 13);
+        leaflet.marker([iPInfoo.value.lat, iPInfoo.value.lng]).addTo(map);
+        map.setView([iPInfoo.value.lat, iPInfoo.value.lng], 13);
       } catch (err) {
         console.log(err.message, "errorrrr yooo");
       }
@@ -92,7 +92,7 @@ export default {
         .addTo(map);
     });
 
-    return { queryIP, iPInfo, getIpInfo };
+    return { queryIP, iPInfoo, getIpInfo };
   },
 };
 </script>
