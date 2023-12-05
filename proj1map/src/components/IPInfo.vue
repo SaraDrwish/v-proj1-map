@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute -bottom-64 lg:-bottom-20 flex flex-col lg:flex-row gap-y-4 gap-x-12 px-8 pt-8 pb-12 rounded-md bg-slate-200"
+    class="absolute z-[100] -bottom-64 lg:-bottom-20 flex flex-col lg:flex-row gap-y-4 gap-x-12 px-8 pt-8 pb-12 rounded-md bg-slate-200"
   >
     <!-- flex item #1 -->
     <div class="flex flex-col">

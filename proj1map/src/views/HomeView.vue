@@ -24,17 +24,57 @@
       <IPInfo />
     </div>
 
-    <!-- ///////// -->
+    <!-- /////MAp//// -->
+    <div
+      id="map"
+      class="h-full z-10 mb-8 w-[90%] border-2 border-yellow-500 rounded-md"
+    ></div>
+    <!-- //////// -->
   </div>
 </template>
 
 <script>
 import IPInfo from "../components/IPInfo.vue";
 import leaflet from "leaflet";
+import { onMounted } from "vue";
+import { ref } from "vue";
+
 // import '../assets/img/pattern-bg.png'
 export default {
   name: "HomeView",
   components: { IPInfo },
+  setup() {
+    let map;
+
+    let queryIP = ref("");
+
+    onMounted(() => {
+      map = leaflet.map("map").setView([51.505, -0.09], 13);
+
+      leaflet
+        .tileLayer(
+          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2FhcmFhYWRlbGwiLCJhIjoiY2xvbHVuOGl6Mm1kNTJzcndsdGg2ODZvNSJ9.Q_EIYu5r-osuXlNy_b-HEA",
+          {
+            maxZoom: 18,
+            attribution:
+              'Map data &copy <a href="https://www.openstreetmap.org/copyright"> openstreetmap </a> conteributors , Imagery <a href="www.mapbox.com/" > </a>',
+            id: "mapbox/streets-v11",
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken:
+              "pk.eyJ1Ijoic2FhcmFhYWRlbGwiLCJhIjoiY2xvbHVuOGl6Mm1kNTJzcndsdGg2ODZvNSJ9.Q_EIYu5r-osuXlNy_b-HEA",
+          }
+        )
+        .addTo(map);
+      //   leaflet
+      //     .tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      //       maxZoom: 19,
+      //       attribution:
+      //         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      //     })
+      //     .addTo(map);
+    });
+  },
 };
 </script>
 
