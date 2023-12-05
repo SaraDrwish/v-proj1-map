@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import HomeView from "../views/HomeView.vue";
+
+import "../tailwind.css";
+import "/dist/tailwind.css";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: Home,
+    component: HomeView,
     meta: {
       title: "IP Address Tracker",
     },

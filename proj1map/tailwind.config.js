@@ -1,9 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ["./src/**/*.{html,js}"],
+  darkMode: false,
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: (theme) => ({
+        "hero-pattern": "url(pattern-bg.png)",
+      }),
+    },
   },
   plugins: [],
-}
-
+};
