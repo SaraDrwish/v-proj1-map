@@ -9,6 +9,9 @@ module.exports = {
       // backgroundImage: {
       // "hero-pattern": 'url("./src/assets/img/pattern-bg.png")',
       // },
+      // backgroundImage: {
+      //   "hero-pattern": "url('./src/assets/img/patternBg.png')",
+      // },
     },
   },
   plugins: [],
