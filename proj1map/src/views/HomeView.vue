@@ -62,8 +62,8 @@ export default {
           state: result.location.region,
           timezone: result.location.timezone,
           isp: result.isp,
-          lat: result.location.lat,
-          lng: result.location.lng,
+          lat: result.location.lat || 0,
+          lng: result.location.lng || 0,
         };
         leaflet.marker([iPInfoo.value.lat, iPInfoo.value.lng]).addTo(map);
         map.setView([iPInfoo.value.lat, iPInfoo.value.lng], 13);

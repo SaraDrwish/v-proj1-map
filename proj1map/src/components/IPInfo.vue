@@ -5,22 +5,22 @@
     <!-- flex item #1 -->
     <div class="flex flex-col">
       <h3 class="text-xs mb-2 uppercase text-pink-500">IP Address</h3>
-      <span class="text-2xl">{{ ipInfoo.address }}</span>
+      <span class="text-2xl">{{ iPInfoo.address }}</span>
     </div>
     <!-- flex item #2 -->
     <div class="flex flex-col">
       <h3 class="text-xs mb-2 uppercase text-pink-500">Location</h3>
-      <span class="text-2xl">{{ ipInfoo.state }}</span>
+      <span class="text-2xl">{{ iPInfoo.state }}</span>
     </div>
     <!-- flex item #3 -->
     <div class="flex flex-col">
       <h3 class="text-xs mb-2 uppercase text-pink-500">Time Zoon</h3>
-      <span class="text-2xl">UTC {{ ipInfoo.timezone }}</span>
+      <span class="text-2xl">UTC {{ iPInfoo.timezone }}</span>
     </div>
     <!-- flex item #4 -->
     <div class="flex flex-col">
       <h3 class="text-xs mb-2 uppercase text-pink-500">Isp</h3>
-      <span class="text-2xl">{{ ipInfoo.isp }}</span>
+      <span class="text-2xl">{{ iPInfoo.isp }}</span>
     </div>
 
     <!-- ////end flex item ///// -->
@@ -29,6 +29,11 @@
 
 <script>
 export default {
-  props: ["ipInfo"],
+  props: {
+    iPInfoo: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
