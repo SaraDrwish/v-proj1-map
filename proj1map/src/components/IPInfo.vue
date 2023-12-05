@@ -4,27 +4,33 @@
   >
     <!-- flex item #1 -->
     <div class="flex flex-col">
-      <h3 class="text-xs mb-2 uppercase text-pink-500">IP Address</h3>
+      <h3 class="text-xs mb-2 uppercase text-pink-500">{{ ipInfo.address }}</h3>
       <span class="text-2xl">8.8.8.8</span>
     </div>
     <!-- flex item #2 -->
     <div class="flex flex-col">
-      <h3 class="text-xs mb-2 uppercase text-pink-500">Location</h3>
+      <h3 class="text-xs mb-2 uppercase text-pink-500">
+        {{ ipInfo.state }}
+      </h3>
       <span class="text-2xl">8.8.8.8</span>
     </div>
     <!-- flex item #3 -->
     <div class="flex flex-col">
       <h3 class="text-xs mb-2 uppercase text-pink-500">Time Zoon</h3>
-      <span class="text-2xl">UTC -07:00</span>
+      <span class="text-2xl">UTC {{ ipInfo.timezone }}</span>
     </div>
     <!-- flex item #4 -->
     <div class="flex flex-col">
       <h3 class="text-xs mb-2 uppercase text-pink-500">Isp</h3>
-      <span class="text-2xl">Google</span>
+      <span class="text-2xl">{{ ipInfo.isp }}</span>
     </div>
 
     <!-- ////end flex item ///// -->
   </div>
 </template>
 
-<script setup></script>
+<script>
+export default {
+  props: ["ipInfo"],
+};
+</script>

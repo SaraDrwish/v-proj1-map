@@ -11,6 +11,8 @@
         <h1 class="text-white text-center text-3xl pb-8">IP Address Tracker</h1>
         <div class="flex">
           <input
+            @click="getIpInfo"
+            v-model="queryIP"
             class="flex-1 py-3 px-3 rounded-tl-md rounded-bl-md focus:outline-none"
             type="text"
             placeholder="search for any IP address or leave it empty "
@@ -21,7 +23,7 @@
         </div>
       </div>
       <!-- IP info -->
-      <IPInfo />
+      <IPInfo v-if="iPInfo" v-bind:ipInfo="ipInfo" />
     </div>
 
     <!-- /////MAp//// -->
@@ -36,8 +38,8 @@
 <script>
 import IPInfo from "../components/IPInfo.vue";
 import leaflet from "leaflet";
-import { onMounted } from "vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import axios from "axios";
 
 // import '../assets/img/pattern-bg.png'
 export default {
@@ -45,8 +47,30 @@ export default {
   components: { IPInfo },
   setup() {
     let map;
+    const queryIP = ref("");
+    const iPInfo = ref(null);
 
-    let queryIP = ref("");
+    const getIpInfo = async () => {
+      try {
+        const data = await axios.get(
+          `https://geo.ipify.org/api/v2/country?apiKey=at_WcTNuPBEyKC5XcH53HHRHXNTUhTkH&ipAddress=${queryIP.value}`
+        );
+        const result = data.data;
+        console.log(result);
+        iPInfo.value = {
+          address: result.ip,
+          state: result.location.region,
+          timezone: result.location.timezone,
+          isp: result.isp,
+          lat: result.location.lat,
+          lng: result.location.lng,
+        };
+        leaflet.marker([ipInfo.value.lat, ipInfo.value.lng]).addTo(map);
+        map.setView([ipInfo.value.lat, ipInfo.value.lng], 13);
+      } catch (err) {
+        console.log(err.message, "errorrrr yooo");
+      }
+    };
 
     onMounted(() => {
       map = leaflet.map("map").setView([51.505, -0.09], 13);
@@ -57,7 +81,7 @@ export default {
           {
             maxZoom: 18,
             attribution:
-              'Map data &copy <a href="https://www.openstreetmap.org/copyright"> openstreetmap </a> conteributors , Imagery <a href="www.mapbox.com/" > </a>',
+              'Map data &copy <a href="https://www.openstreetmap.org/copyright">openstreetmap</a>conteributors , Imagery <a href="www.mapbox.com/" > </a>',
             id: "mapbox/streets-v11",
             tileSize: 512,
             zoomOffset: -1,
@@ -66,14 +90,9 @@ export default {
           }
         )
         .addTo(map);
-      //   leaflet
-      //     .tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      //       maxZoom: 19,
-      //       attribution:
-      //         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      //     })
-      //     .addTo(map);
     });
+
+    return { queryIP, iPInfo, getIpInfo };
   },
 };
 </script>
